@@ -15,6 +15,8 @@
                 <tr>
                     <th class="report_name">氏名</th>
                     <th class="report_date">日付</th>
+                    <th class="arrived_at">出勤時間</th>
+                    <th class="leaved_at">退勤時間</th>
                     <th class="report_title">タイトル</th>
                     <th class="report_action">操作</th>
                 </tr>
@@ -22,6 +24,22 @@
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><c:out value="${report.employee.name}"/></td>
                         <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd'/></td>
+                        <c:choose>
+                            <c:when test="${report.arrived_at == null }">
+                                <td class="arrived_at">--:--</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td class="arrived_at"><fmt:formatDate value='${report.arrived_at}' pattern='HH:mm'/></td>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${report.leaved_at == null }">
+                                <td class="leaved_at">--:--</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td class="leaved_at"><fmt:formatDate value='${report.leaved_at}' pattern='HH:mm'/></td>
+                            </c:otherwise>
+                        </c:choose>
                         <td class="report_title">${report.title}</td>
                         <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}'/>">詳細を見る</a></td>
                     </tr>

@@ -18,6 +18,28 @@
                             <td><fmt:formatDate value="${report.report_date}" pattern="yyyy-MM-dd"/></td>
                         </tr>
                         <tr>
+                            <th>出勤時間</th>
+                            <c:choose>
+                                <c:when test="${report.arrived_at == null }">
+                                    <td>--:--</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><fmt:formatDate value="${report.arrived_at}" pattern="HH:mm"/></td>
+                                </c:otherwise>
+                            </c:choose>
+                        </tr>
+                        <tr>
+                            <th>退勤時間</th>
+                            <c:choose>
+                                <c:when test="${report.leaved_at == null }">
+                                    <td>--:--</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><fmt:formatDate value="${report.leaved_at}" pattern="HH:mm"/></td>
+                                </c:otherwise>
+                            </c:choose>
+                        </tr>
+                        <tr>
                             <th>内容</th>
                             <td>
                                 <pre><c:out value="${report.content}"/></pre>

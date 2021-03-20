@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -61,6 +62,12 @@ public class Report {
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
 
+    @Column(name = "arrived_at", nullable = true)
+    private Time arrived_at;
+
+    @Column(name = "leaved_at", nullable = true)
+    private Time leaved_at;
+
     public Integer getId() {
         return id;
     }
@@ -115,5 +122,21 @@ public class Report {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Time getArrived_at() {
+        return arrived_at;
+    }
+
+    public void setArrived_at(Time arrived_at) {
+        this.arrived_at = arrived_at;
+    }
+
+    public Time getLeaved_at() {
+        return leaved_at;
+    }
+
+    public void setLeaved_at(Time leaved_at) {
+        this.leaved_at = leaved_at;
     }
 }
