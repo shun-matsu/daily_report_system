@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Company;
 import models.Employee;
 import models.Report;
 import models.validators.ReportValidator;
@@ -69,6 +70,10 @@ public class ReportsCreateServlet extends HttpServlet {
             }else{
                 r.setLeaved_at(null);
             }
+
+            if(request.getParameter("company_id") != null && !request.getParameter("company_id").equals("")){
+                r.setCompany(em.find(Company.class,Integer.parseInt(request.getParameter("company_id"))));
+            }else{r.setCompany(null);}
 
             List<String> errors = ReportValidator.validate(r);
             if(errors.size() > 0){

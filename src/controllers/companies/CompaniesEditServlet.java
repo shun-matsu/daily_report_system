@@ -1,8 +1,6 @@
-package controllers.reports;
+package controllers.companies;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -13,20 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Company;
-import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsNewServlet
+ * Servlet implementation class EmployeesEditServlet
  */
-@WebServlet("/reports/new")
-public class ReportsNewServlet extends HttpServlet {
+@WebServlet("/companies/edit")
+public class CompaniesEditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsNewServlet() {
+    public CompaniesEditServlet() {
         super();
     }
 
@@ -35,18 +32,16 @@ public class ReportsNewServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
-        request.setAttribute("_token", request.getSession().getId());
 
-        Report r = new Report();
-        r.setReport_date(new Date(System.currentTimeMillis()));
-        List<Company> companies = em.createNamedQuery("getValiditiveCompanies", Company.class).getResultList();
+        Company c = em.find(Company.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
-        request.setAttribute("report", r);
-        request.setAttribute("companies", companies);
+        request.setAttribute("company", c);
+        request.setAttribute("_token", request.getSession().getId());
+        request.getSession().setAttribute("company_id", c.getId());
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/new.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/companies/edit.jsp");
         rd.forward(request, response);
     }
 

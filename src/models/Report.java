@@ -68,6 +68,14 @@ public class Report {
     @Column(name = "leaved_at", nullable = true)
     private Time leaved_at;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id", nullable = true)
+    private Company company;
+
+    @Lob
+    @Column(name = "business_mtg", nullable = true)
+    private String business_mtg;
+
     public Integer getId() {
         return id;
     }
@@ -138,5 +146,21 @@ public class Report {
 
     public void setLeaved_at(Time leaved_at) {
         this.leaved_at = leaved_at;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public String getBusiness_mtg() {
+        return business_mtg;
+    }
+
+    public void setBusiness_mtg(String business_mtg) {
+        this.business_mtg = business_mtg;
     }
 }

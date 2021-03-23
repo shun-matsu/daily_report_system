@@ -46,6 +46,16 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>取引先</th>
+                            <td><c:out value="${report.company.name}"/></td>
+                        </tr>
+                        <tr>
+                            <th>商談状況</th>
+                            <td>
+                                <pre><c:out value="${report.business_mtg}"/></pre>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>登録日時</th>
                             <td>
                                 <fmt:formatDate value="${report.created_at}" pattern="yyyy-MM-dd HH:mm:ss"/>
